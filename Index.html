@@ -4,20 +4,39 @@
 <meta charset="UTF-8"><title>The Degenerates HQ</title>
 <style>
   body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#111;color:#ddd}
-  .topnav{background:#222;padding:.5rem 1rem;display:flex;gap:1rem}
-  .topnav a{color:#ccc;text-decoration:none}
+  .topnav{background:#222;padding:.5rem 1rem;display:flex;justify-content:space-between;align-items:center}
+  .topnav a{color:#ccc;text-decoration:none;margin-right:1rem}
   .topnav a:hover{color:#fff}
   .container{display:flex}
   .sidebar{background:#1b1b1b;width:220px;padding:1rem}
   .sidebar a{display:block;color:#aaa;margin:.5rem 0;text-decoration:none}
   .sidebar a:hover{color:#fff}
   .main{flex:1;padding:1.5rem;background:#181818}
-</style></head>
+  body.light{background:#eee;color:#111}
+  body.light .topnav,body.light .sidebar,body.light .main{background:#fff;color:#111}
+  button{margin-top:1rem;padding:.3rem .6rem}
+</style>
+</head>
 <body>
-<div class="topnav"><a href="#">Player</a><a href="#">Spies</a><a href="#">Faction</a><a href="#">Company</a></div>
+<div class="topnav">
+  <div>
+    <a href="#">Player</a><a href="#">Spies</a><a href="#">Faction</a><a href="#">Company</a>
+  </div>
+  <div>
+    <span id="user">DegenerateX</span> | <a href="#">Logout</a>
+  </div>
+</div>
 <div class="container">
-  <div class="sidebar"><a href="#">User Settings</a><a href="#">HQ Functionalities</a><a href="#">Bugs</a></div>
+  <div class="sidebar">
+    <a href="#">User Settings</a>
+    <a href="#">HQ Functionalities</a>
+    <a href="#">Bugs</a>
+    <button>Toggle light/dark</button>
+  </div>
   <div class="main"><h1>Welcome</h1><p>Dashboard content.</p></div>
 </div>
+<script>
+  document.querySelector('button').onclick = ()=>document.body.classList.toggle('light');
+</script>
 </body>
 </html>
