@@ -16,11 +16,18 @@
   <button onclick="login()">Enter</button>
 </div>
 <script>
-  function login(){
-    const k=document.getElementById('key').value.trim();
-    if(k){localStorage.setItem('tornKey',k);location.href='dashboard.html';}
-    else alert('Key required');
-  }
+async function login(){
+  const k=document.getElementById('key').value.trim();
+  if(!k) return alert('Key required');
+  try{
+    const r=await fetch(`https://api.torn.com/user/?selections=profile&key=${k}`);
+    const d=await r.json();
+    if(d.error) throw new Error(d.error.error);
+    localStorage.setItem('tornKey',k);
+    localStorage.setItem('userName',d.name);
+    location.href='dashboard.html';
+  }catch(e){alert('Invalid key: '+e.message);}
+}
 </script>
 </body>
 </html>
