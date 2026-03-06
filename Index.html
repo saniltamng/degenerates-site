@@ -1,32 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"><title>The Degenerates HQ</title>
+<meta charset="UTF-8"><title>Degenerates – Sign In</title>
 <style>
-  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#111;color:#ddd}
-  .topnav{background:#222;padding:.5rem 1rem;display:flex;justify-content:space-between;align-items:center}
-  .topnav a,.topnav button{color:#ccc;text-decoration:none;margin-right:1rem;background:none;border:none;cursor:pointer;font-size:1rem}
-  .topnav a:hover,.topnav button:hover{color:#fff}
-  .container{display:flex}
-  .sidebar{background:#1b1b1b;width:220px;padding:1rem}
-  .sidebar a{display:block;color:#aaa;margin:.5rem 0;text-decoration:none}
-  .sidebar a:hover{color:#fff}
-  .main{flex:1;padding:1.5rem;background:#181818}
-  body.light{background:#eee;color:#111}
-  body.light .topnav,body.light .sidebar,body.light .main{background:#fff;color:#111}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#111;color:#ddd;display:flex;justify-content:center;align-items:center;height:100vh}
+  .box{background:#222;padding:2rem;border-radius:.5rem;text-align:center}
+  input{margin:.5rem 0;padding:.5rem;width:200px}
+  button{padding:.5rem 1rem;margin-top:.5rem}
 </style>
 </head>
 <body>
-<div class="topnav">
-  <div><a href="#">Player</a><a href="#">Spies</a><a href="#">Faction</a><a href="#">Company</a></div>
-  <div><span id="user">DegenerateX</span> | <button title="Toggle light/dark">🌓</button> | <a href="#">Logout</a></div>
+<div class="box">
+  <h2>Sign In</h2>
+  <input type="text" placeholder="Username"><br>
+  <input type="password" placeholder="Password"><br>
+  <button onclick="location.href='dashboard.html'">Enter</button>
 </div>
-<div class="container">
-  <div class="sidebar"><a href="#">User Settings</a><a href="#">HQ Functionalities</a><a href="#">Bugs</a></div>
-  <div class="main"><h1>Welcome</h1><p>Dashboard content.</p></div>
-</div>
-<script>
-  document.querySelector('button').onclick = ()=>document.body.classList.toggle('light');
-</script>
 </body>
 </html>
