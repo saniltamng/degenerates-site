@@ -1,37 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>The Degenerates HQ</title>
-  <style>
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#1a1a1a;color:#ddd}
-    .container{display:flex}
-    .sidebar{width:220px;background:#111;padding:1rem;height:100vh;box-sizing:border-box}
-    .sidebar h2{color:#c33;margin-top:0}
-    .main{flex:1;padding:2rem}
-    h1{color:#c33}
-    table{border-collapse:collapse;width:100%;margin-top:1rem}
-    th,td{padding:.5rem;border:1px solid #333;text-align:left}
-    th{background:#222}
-  </style>
-</head>
+<meta charset="UTF-8"><title>The Degenerates HQ</title>
+<style>
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#111;color:#ddd}
+  .topnav{background:#222;padding:.5rem 1rem;display:flex;gap:1rem}
+  .topnav a{color:#ccc;text-decoration:none}
+  .topnav a:hover{color:#fff}
+  .container{display:flex}
+  .sidebar{background:#1b1b1b;width:220px;padding:1rem}
+  .sidebar a{display:block;color:#aaa;margin:.5rem 0;text-decoration:none}
+  .sidebar a:hover{color:#fff}
+  .main{flex:1;padding:1.5rem;background:#181818}
+</style></head>
 <body>
-  <div class="container">
-    <div class="sidebar">
-      <h2>Degenerates HQ</h2>
-      <p>Member tools</p>
-      <p>Faction info</p>
-    </div>
-    <div class="main">
-      <h1>Welcome!</h1>
-      <p>Quick stats:</p>
-      <table>
-        <tr><th>Name</th><th>Level</th><th>Respect</th></tr>
-        <tr><td>Player1</td><td>50</td><td>1,200</td></tr>
-        <tr><td>Player2</td><td>45</td><td>980</td></tr>
-      </table>
-      <p>Plug API data here later for live stats.</p>
-    </div>
-  </div>
+<div class="topnav"><a href="#">Player</a><a href="#">Spies</a><a href="#">Faction</a><a href="#">Company</a></div>
+<div class="container">
+  <div class="sidebar"><a href="#">User Settings</a><a href="#">HQ Functionalities</a><a href="#">Bugs</a></div>
+  <div class="main"><h1>Welcome</h1><p>Dashboard content.</p></div>
+</div>
 </body>
 </html>
