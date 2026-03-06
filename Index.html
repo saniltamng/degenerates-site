@@ -4,7 +4,7 @@
 <meta charset="UTF-8"><title>Degenerates – API Login</title>
 <style>
   body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#111;color:#ddd;display:flex;justify-content:center;align-items:center;height:100vh}
-  .box{background:#222;padding:2rem;border-radius:.5rem;text-align:center}
+ .box{background:#222;padding:2rem;border-radius:.5rem;text-align:center}
   input{margin:.5rem 0;padding:.5rem;width:220px}
   button{padding:.5rem 1rem;margin-top:.5rem}
 </style>
@@ -24,7 +24,7 @@ async function login(){
     const d=await r.json();
     if(d.error) throw new Error(d.error.error);
     localStorage.setItem('tornKey',k);
-    localStorage.setItem('userName',d.name);
+    localStorage.setItem('userFull', `${d.name} [${d.player_id}]`);
     location.href='dashboard.html';
   }catch(e){alert('Invalid key: '+e.message);}
 }
