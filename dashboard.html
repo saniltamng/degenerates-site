@@ -17,8 +17,11 @@
 </style>
 </head>
 <body>
-<div class="topnav"><div><a href="#">Player</a><a href="#">Spies</a><a href="#">Faction</a><a href="#">Company</a></div><div><span id="user">DegenerateX</span> | <button title="Toggle light/dark">🌓</button> | <a href="index.html">Logout</a></div></div>
+<div class="topnav"><div><a href="#">Player</a><a href="#">Spies</a><a href="#">Faction</a><a href="#">Company</a></div><div><span id="user">Player</span> | <button title="Toggle light/dark">🌓</button> | <a href="index.html">Logout</a></div></div>
 <div class="container"><div class="sidebar"><a href="#">User Settings</a><a href="#">HQ Functionalities</a><a href="#">Bugs</a></div><div class="main"><h1>Welcome</h1><p>Dashboard content.</p></div></div>
-<script>document.querySelector('button').onclick = ()=>document.body.classList.toggle('light');</script>
+<script>
+  document.getElementById('user').textContent = localStorage.getItem('userName')||'Player';
+  document.querySelector('button').onclick = ()=>document.body.classList.toggle('light');
+</script>
 </body>
 </html>
