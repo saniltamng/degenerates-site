@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"><title>Degenerates – Sign In</title>
+<meta charset="UTF-8"><title>Degenerates – API Login</title>
 <style>
   body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#111;color:#ddd;display:flex;justify-content:center;align-items:center;height:100vh}
   .box{background:#222;padding:2rem;border-radius:.5rem;text-align:center}
-  input{margin:.5rem 0;padding:.5rem;width:200px}
+  input{margin:.5rem 0;padding:.5rem;width:220px}
   button{padding:.5rem 1rem;margin-top:.5rem}
 </style>
 </head>
 <body>
 <div class="box">
-  <h2>Sign In</h2>
-  <input type="text" placeholder="Username"><br>
-  <input type="password" placeholder="Password"><br>
-  <button onclick="location.href='dashboard.html'">Enter</button>
+  <h2>Enter API Key</h2>
+  <input id="key" type="text" placeholder="Torn API key"><br>
+  <button onclick="login()">Enter</button>
 </div>
+<script>
+  function login(){
+    const k=document.getElementById('key').value.trim();
+    if(k){localStorage.setItem('tornKey',k);location.href='dashboard.html';}
+    else alert('Key required');
+  }
+</script>
 </body>
 </html>
