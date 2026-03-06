@@ -2,22 +2,36 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>The Degenerates – Faction Hub</title>
+  <title>The Degenerates HQ</title>
   <style>
-    body {font-family:Arial, sans-serif; background:#111; color:#eee; padding:2rem;}
-    h1{color:#c33;}
-    table{border-collapse:collapse; width:100%;}
-    th,td{border:1px solid #444; padding:.5rem; text-align:left;}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#1a1a1a;color:#ddd}
+    .container{display:flex}
+    .sidebar{width:220px;background:#111;padding:1rem;height:100vh;box-sizing:border-box}
+    .sidebar h2{color:#c33;margin-top:0}
+    .main{flex:1;padding:2rem}
+    h1{color:#c33}
+    table{border-collapse:collapse;width:100%;margin-top:1rem}
+    th,td{padding:.5rem;border:1px solid #333;text-align:left}
+    th{background:#222}
   </style>
 </head>
 <body>
-  <h1>The Degenerates</h1>
-  <p>Member tracker (demo data):</p>
-  <table>
-    <tr><th>Name</th><th>Level</th><th>Respect</th></tr>
-    <tr><td>Player1</td><td>50</td><td>1,200</td></tr>
-    <tr><td>Player2</td><td>45</td><td>980</td></tr>
-  </table>
-  <p>Spoiler: plug in Torn API calls later to fill the table dynamically.</p>
+  <div class="container">
+    <div class="sidebar">
+      <h2>Degenerates HQ</h2>
+      <p>Member tools</p>
+      <p>Faction info</p>
+    </div>
+    <div class="main">
+      <h1>Welcome!</h1>
+      <p>Quick stats:</p>
+      <table>
+        <tr><th>Name</th><th>Level</th><th>Respect</th></tr>
+        <tr><td>Player1</td><td>50</td><td>1,200</td></tr>
+        <tr><td>Player2</td><td>45</td><td>980</td></tr>
+      </table>
+      <p>Plug API data here later for live stats.</p>
+    </div>
+  </div>
 </body>
 </html>
