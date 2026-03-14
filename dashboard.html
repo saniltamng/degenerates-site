@@ -1,29 +1,170 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"><title>The Degenerates HQ</title>
+<meta charset="UTF-8"><title>Dashboard - The Degenerates HQ</title>
 <style>
-  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#111;color:#ddd}
- .topnav{background:#222;padding:.5rem 1rem;display:flex;justify-content:space-between;align-items:center}
- .topnav a,.topnav button{color:#ccc;text-decoration:none;margin-right:1rem;background:none;border:none;cursor:pointer;font-size:1rem}
- .topnav a:hover,.topnav button:hover{color:#fff}
- .container{display:flex}
- .sidebar{background:#1b1b1b;width:220px;padding:1rem}
- .sidebar a{display:block;color:#aaa;margin:.5rem 0;text-decoration:none}
- .sidebar a:hover{color:#fff}
- .main{flex:1;padding:1.5rem;background:#181818}
-  body.light{background:#eee;color:#111}
-  body.light.topnav,body.light.sidebar,body.light.main{background:#fff;color:#111}
+  /* Base Layout from dashboard 1.html */
+  html,body{height:100%;margin:0;overflow:hidden;}
+  body{display:flex;flex-direction:column;font-family:Arial,Helvetica,sans-serif;background:#111;color:#ddd}
+  
+  .topnav{background:#222;padding:.5rem 1rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #333;}
+  .topnav a,.topnav button{color:#ccc;text-decoration:none;margin-right:1rem;background:none;border:none;cursor:pointer;font-size:1rem}
+  .topnav a:hover,.topnav button:hover{color:#fff}
+  
+  .container{flex:1;display:flex;overflow:hidden;}
+  .sidebar{background:#1b1b1b;width:220px;padding:1rem;border-right:1px solid #222;}
+  .sidebar a{display:block;color:#aaa;margin:.5rem 0;text-decoration:none;padding:5px 0;}
+  .sidebar a:hover{color:#fff}
+  
+  .main{flex:1;padding:1.5rem;background:#181818;overflow-y:auto}
+
+  /* Vital Sign Bars */
+  .vitals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin-bottom: 30px; }
+  .bar-meta { display: flex; justify-content: space-between; font-size: 0.75rem; color: #8cf; margin-bottom: 4px; font-weight: bold; text-transform: uppercase; }
+  .bar-bg { height: 8px; background: #222; border-radius: 4px; overflow: hidden; border: 1px solid #333; }
+  .bar-fill { height: 100%; width: 0%; transition: width 0.8s ease; }
+  .life-fill { background: #5cb85c; } .happy-fill { background: #f0ad4e; }
+  .energy-fill { background: #5bc0de; } .nerve-fill { background: #d9534f; }
+
+  /* Data Tables */
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; border-top: 1px solid #333; padding-top: 20px; }
+  .data-section h3 { color: #8cf; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+  .data-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.02); }
+  .data-row span:first-child { color: #888; }
+  .data-row span:last-child { color: #fff; font-weight: bold; font-family: 'Courier New', monospace; }
+  .money-green { color: #5cb85c !important; }
 </style>
 </head>
 <body>
-<div class="topnav"><div><a href="#">Player</a><a href="#">Spies</a><a href="#">Faction</a><a href="#">Company</a></div><div><span id="user"></span> | <button title="Toggle light/dark">🌓</button> | <a href="index.html">Logout</a></div></div>
-<div class="container"><div class="sidebar"><a href="#">User Settings</a><a href="#">HQ Functionalities</a><a href="#">Bugs</a></div><div class="main"><h1 id="greet">Welcome</h1><p>Dashboard content.</p></div></div>
+
+<div class="topnav">
+  <div>
+    <a href="dashboard.html">Player</a>
+    <a href="#">Spies</a>
+    <a href="warring.html">Warring</a>
+    <a href="#">Company</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="chain.html">Chain</a>
+  </div>
+  <div><span id="user"></span> | <button title="Toggle light/dark">🌓</button> | <a href="index.html">Logout</a></div>
+</div>
+
+<div class="container">
+    <div class="sidebar">
+      <a href="#">User Settings</a>
+      <a href="#">HQ Functionalities</a>
+      <a href="#">Bugs</a>
+    </div>
+
+    <div class="main">
+        <h1 id="greet" style="margin-top:0; font-size:1.5rem; color:#8cf;">Welcome</h1>
+        
+        <div class="vitals-grid">
+          <div class="bar-wrapper"><div class="bar-meta"><span>Life</span><span id="life-text">0 / 0</span></div><div class="bar-bg"><div id="life-bar" class="bar-fill life-fill"></div></div></div>
+          <div class="bar-wrapper"><div class="bar-meta"><span>Happiness</span><span id="happy-text">0 / 0</span></div><div class="bar-bg"><div id="happy-bar" class="bar-fill happy-fill"></div></div></div>
+          <div class="bar-wrapper"><div class="bar-meta"><span>Energy</span><span id="energy-text">0 / 0</span></div><div class="bar-bg"><div id="energy-bar" class="bar-fill energy-fill"></div></div></div>
+          <div class="bar-wrapper"><div class="bar-meta"><span>Nerve</span><span id="nerve-text">0 / 0</span></div><div class="bar-bg"><div id="nerve-bar" class="bar-fill nerve-fill"></div></div></div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="data-section">
+                <h3>General Information</h3>
+                <div class="data-row"><span>Level</span><span id="level">0</span></div>
+                <div class="data-row"><span>Rank</span><span id="rank">-</span></div>
+                <div class="data-row"><span>Faction</span><span id="faction">-</span></div>
+                <div class="data-row"><span>Age</span><span id="age">0</span></div>
+                <div class="data-row"><span>Cash on Hand</span><span id="cash" class="money-green">$0</span></div>
+                <div class="data-row"><span>Networth</span><span id="nw" class="money-green">$0</span></div>
+            </div>
+
+            <div class="data-section">
+                <h3>Working Stats</h3>
+                <div class="data-row"><span>Manual</span><span id="manual">0</span></div>
+                <div class="data-row"><span>Intelligence</span><span id="intelligence">0</span></div>
+                <div class="data-row"><span>Endurance</span><span id="endurance">0</span></div>
+            </div>
+
+            <div class="data-section">
+                <h3>Battle Stats</h3>
+                <div class="data-row"><span>Strength</span><span id="str">0</span></div>
+                <div class="data-row"><span>Defense</span><span id="def">0</span></div>
+                <div class="data-row"><span>Speed</span><span id="spd">0</span></div>
+                <div class="data-row"><span>Dexterity</span><span id="dex">0</span></div>
+                <div class="data-row" style="border-top:1px solid #444; margin-top:5px; padding-top:10px;">
+                  <span style="color:#8cf">TOTAL</span><span id="total-stats">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-  const full=localStorage.getItem('userFull')||'Player';
-  document.getElementById('user').textContent=full;
-  document.getElementById('greet').textContent=`Welcome, ${full}`;
-  document.querySelector('button').onclick = ()=>document.body.classList.toggle('light');
+  // UI Logic from original file
+  document.getElementById('user').textContent = localStorage.getItem('userFull')||'Player';
+  document.getElementById('greet').textContent = `Welcome, ${localStorage.getItem('userName')||'Player'}`;
+  
+  const userApiKey = localStorage.getItem('tornKey') || 'E0EnE3b2ktSA9DmB';
+
+  async function updateAllStats() {
+    if (!userApiKey) return;
+    
+    try {
+      // 1. Vitals (v2)
+      const barsRes = await fetch(`https://api.torn.com/v2/user/bars?key=${userApiKey}`);
+      const barsData = await barsRes.json();
+      if(barsData.bars) {
+        setBar('life', barsData.bars.life);
+        setBar('happy', barsData.bars.happy);
+        setBar('energy', barsData.bars.energy);
+        setBar('nerve', barsData.bars.nerve);
+      }
+
+      // 2. Working Stats (v2 Deep Path Fix)
+      const workRes = await fetch(`https://api.torn.com/v2/user/personalstats?cat=jobs&key=${userApiKey}`);
+      const workData = await workRes.json();
+      const ws = workData.personalstats?.jobs?.stats;
+      if(ws) {
+        document.getElementById('manual').textContent = (ws.manual || 0).toLocaleString();
+        document.getElementById('intelligence').textContent = (ws.intelligence || 0).toLocaleString();
+        document.getElementById('endurance').textContent = (ws.endurance || 0).toLocaleString();
+      }
+
+      // 3. General & Battle Stats (v1)
+      const userRes = await fetch(`https://api.torn.com/user/?selections=profile,money,battlestats,personalstats&key=${userApiKey}`);
+      const d = await userRes.json();
+
+      document.getElementById('level').textContent = d.level;
+      document.getElementById('rank').textContent = d.rank;
+      document.getElementById('faction').textContent = d.faction ? d.faction.faction_name : "None";
+      document.getElementById('age').textContent = (d.age || 0).toLocaleString();
+      document.getElementById('cash').textContent = `$${(d.money_onhand || 0).toLocaleString()}`;
+      document.getElementById('nw').textContent = `$${(d.personalstats?.networth || 0).toLocaleString()}`;
+
+      document.getElementById('str').textContent = (d.strength || 0).toLocaleString();
+      document.getElementById('def').textContent = (d.defense || 0).toLocaleString();
+      document.getElementById('spd').textContent = (d.speed || 0).toLocaleString();
+      document.getElementById('dex').textContent = (d.dexterity || 0).toLocaleString();
+      document.getElementById('total-stats').textContent = (d.strength + d.defense + d.speed + d.dexterity).toLocaleString();
+
+    } catch (err) { console.error("Sync Error:", err); }
+  }
+
+  function setBar(id, data) {
+    const pct = Math.min((data.current / data.maximum) * 100, 100);
+    document.getElementById(`${id}-bar`).style.width = pct + '%';
+    document.getElementById(`${id}-text`).textContent = `${data.current.toLocaleString()} / ${data.maximum.toLocaleString()}`;
+  }
+
+  updateAllStats();
+  setInterval(updateAllStats, 30000);
+// Link Council button only for YOU
+if (parseInt(localStorage.getItem('userId')) === 3716384) {
+    const sidebar = document.querySelector('.sidebar');
+    const a = document.createElement('a');
+    a.href = 'council.html';
+    a.innerHTML = '<strong style="color:#5cb85c">⚙️ COUNCIL UPLOAD</strong>';
+    sidebar.appendChild(a);
+}
 </script>
 </body>
 </html>
