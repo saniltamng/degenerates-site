@@ -1,19 +1,71 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"><title>Degenerates – API Login</title>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Degenerates – Login</title>
 <style>
-  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#111;color:#ddd;display:flex;justify-content:center;align-items:center;height:100vh}
- .box{background:#222;padding:2rem;border-radius:.5rem;text-align:center}
-  input{margin:.5rem 0;padding:.5rem;width:220px}
-  button{padding:.5rem 1rem;margin-top:.5rem}
+  html,body{height:100%;margin:0;font-family:Arial,Helvetica,sans-serif}
+  body{display:flex;justify-content:center;align-items:center;background:#8b0000;color:#fff}
+  .box{background:#222;padding:2.5rem 3rem;border-radius:.5rem;width:560px;height:320px;text-align:center;position:relative}
+  .box h2{margin-top:0}
+  .box label{display:block;text-align:left;margin:.5rem 0 .2rem}
+  .box input{width:100%;padding:.5rem;border:none;border-bottom:1px solid #555;background:transparent;color:#fff}
+  .box input:-webkit-autofill{
+    -webkit-box-shadow:0 0 0 1000px #222 inset;
+    -webkit-text-fill-color:#fff;
+  }
+  .box input:-webkit-autofill:focus{
+    -webkit-box-shadow:0 0 0 1000px #222 inset;
+    -webkit-text-fill-color:#fff;
+  }
+  .box input:focus{
+    outline:none;
+    border:none;
+    border-bottom:1px solid #555;
+    background:transparent;
+    box-shadow:none;
+  }
+  .terms{font-size:.85rem;margin:1rem 0}
+  .terms a{color:#8cf;cursor:pointer}
+  button{padding:.5rem 1.5rem;border:1px solid #8cf;background:transparent;color:#8cf;cursor:pointer}
+  #terms{display:none;position:absolute;top:2%;left:2%;right:2%;bottom:2%;background:#222;color:#fff;padding:1rem;border:1px solid #555;z-index:10;font-size:.75rem;overflow:auto}
+  #terms table{width:100%;border-collapse:collapse}
+  #terms th,#terms td{border:1px solid #444;padding:.4rem;text-align:center}
 </style>
 </head>
 <body>
 <div class="box">
-  <h2>Enter API Key</h2>
-  <input id="key" type="text" placeholder="Torn API key"><br>
-  <button onclick="login()">Enter</button>
+  <h2>Please login.</h2>
+  <label>Api Key *</label>
+  <input id="key" placeholder="Only limited access needed">
+  <div class="terms"><a onclick="document.getElementById('terms').style.display='block'">API Terms of Service</a></div>
+  <button onclick="login()">LOG IN</button>
+  <div id="terms" style="display:none;">
+    <h3>API Terms of Service</h3>
+    <table>
+      <tbody>
+        <tr>
+          <th>Data Storage</th>
+          <th>Data Sharing</th>
+          <th>Purpose of Use</th>
+          <th>Key Storage &amp; Sharing</th>
+          <th>Key Access Level</th>
+        </tr>
+         <tr>
+            <td>Will the data be stored for any purpose?</td>
+            <td>Who can access the data besides the end user?</td>
+            <td>What is the stored data being used for?</td>
+            <td>Will the API key be stored securely and who can access it?</td>
+            <td>What key access level or specific selections are required?</td>
+          </tr>
+          <tr>
+            <td>Persistent</td>
+            <td>Faction</td>
+            <td>Optimization/Maintenance<br>Show info to faction members</td>
+            <td>Stored remotely securely / Used only for automation</td>
+            <td>Limited Access - Basic Functionality<br>Full Access - Optional Functionality</td>
+        </tr>
+    </tbody></table>
+    <button onclick="document.getElementById('terms').style.display='none'" style="margin-top:.5rem">Close</button>
+  </div>
 </div>
 <script>
 async function login(){
@@ -25,9 +77,9 @@ async function login(){
     if(d.error) throw new Error(d.error.error);
     localStorage.setItem('tornKey',k);
     localStorage.setItem('userFull', `${d.name} [${d.player_id}]`);
+    localStorage.setItem('userName',d.name);
     location.href='dashboard.html';
   }catch(e){alert('Invalid key: '+e.message);}
 }
 </script>
-</body>
-</html>
+</body></html>
